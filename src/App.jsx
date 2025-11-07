@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ClearAllButton from "./ClearAllButton"; // 🆕 import the new component
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -22,15 +23,22 @@ function App() {
     setTasks(tasks.filter((task) => task.id !== id));
   };
 
+  const clearAllTasks = () => {
+    setTasks([]);
+  };
+
   return (
     <div style={{ padding: "2rem", fontFamily: "Arial" }}>
-      <h1>📝 Task Tracker 3</h1>
+      <h1>📝 Task Tracker</h1>
       <input
         value={newTask}
         onChange={(e) => setNewTask(e.target.value)}
         placeholder="Add a new task"
       />
       <button onClick={addTask}>Add</button>
+
+      {/* 🆕 Using the new ClearAllButton component */}
+      <ClearAllButton onClear={clearAllTasks} visible={tasks.length > 0} />
 
       <ul style={{ marginTop: "1rem" }}>
         {tasks.map((task) => (
