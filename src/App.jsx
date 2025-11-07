@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-
+import ClearAllButton from "./ClearAllButton";
+import Bugfix from "./Bugfix";
+// 🆕 import the new component
 function App() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
@@ -22,6 +24,10 @@ function App() {
     setTasks(tasks.filter((task) => task.id !== id));
   };
 
+  const clearAllTasks = () => {
+    setTasks([]);
+  };
+
   return (
     <div style={{ padding: "2rem", fontFamily: "Arial" }}>
       <h1>📝 Task Tracker 3</h1>
@@ -31,6 +37,8 @@ function App() {
         placeholder="Add a new task"
       />
       <button onClick={addTask}>Add</button>
+      {/* 🆕 Using the new ClearAllButton component */}
+      <ClearAllButton onClear={clearAllTasks} visible={tasks.length > 0} />
 
       <ul style={{ marginTop: "1rem" }}>
         {tasks.map((task) => (
@@ -57,6 +65,11 @@ function App() {
           </li>
         ))}
       </ul>
+      <Bugfix
+        issue="Empty tasks could be added without validation."
+        fixDescription="Added input validation in addTask() to prevent empty tasks."
+        isFixed={true}
+      />
     </div>
   );
 }
