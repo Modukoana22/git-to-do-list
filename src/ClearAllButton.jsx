@@ -8,7 +8,7 @@ export default function ClearAllButton({ onClear, visible }) {
       onClick={onClear}
       style={{
         marginLeft: "1rem",
-        backgroundColor: "blue",
+        backgroundColor: "red",
         color: "white",
         border: "none",
         padding: "0.4rem 0.8rem",
