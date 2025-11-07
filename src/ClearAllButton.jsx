@@ -16,7 +16,7 @@ export default function ClearAllButton({ onClear, visible }) {
         cursor: "pointer",
       }}
     >
-      Clear All
+      Clear All Tasks
     </button>
   );
 }
