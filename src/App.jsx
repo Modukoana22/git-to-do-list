@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import ClearAllButton from "./ClearAllButton";
+import TaskItem from "./TaskItem";
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -42,27 +43,12 @@ function App() {
 
       <ul style={{ marginTop: "1rem" }}>
         {tasks.map((task) => (
-          <li key={task.id} style={{ marginBottom: "0.5rem" }}>
-            <input
-              type="checkbox"
-              checked={task.done}
-              onChange={() => toggleTask(task.id)}
-            />
-            <span
-              style={{
-                textDecoration: task.done ? "line-through" : "none",
-                marginLeft: "0.5rem",
-              }}
-            >
-              {task.text}
-            </span>
-            <button
-              onClick={() => deleteTask(task.id)}
-              style={{ marginLeft: "1rem" }}
-            >
-              Delete
-            </button>
-          </li>
+          <TaskItem
+            key={task.id}
+            task={task}
+            onToggle={toggleTask}
+            onDelete={deleteTask}
+          />
         ))}
       </ul>
     </div>
