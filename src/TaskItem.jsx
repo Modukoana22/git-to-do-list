@@ -1,48 +1,34 @@
-import React, { useState } from "react";
+import React from "react";
 
-export default function TaskItem({ task }) {
-  const [isComplete, setIsComplete] = useState(false);
-
-  const toggleCompletion = () => {
-    setIsComplete((prev) => !prev);
-  };
-
+export default function TaskItem({ task, onToggle, onDelete }) {
   return (
     <li
       style={{
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        marginBottom: "8px",
+        marginBottom: "0.5rem",
         padding: "8px",
-        borderRadius: "6px",
-        backgroundColor: isComplete ? "#e8f5e9" : "#fff3e0",
-        border: "1px solid #ccc",
-        fontFamily: "Arial",
+        backgroundColor: "#f5f5f5",
+        borderRadius: "5px",
       }}
     >
-      <span
-        style={{
-          textDecoration: isComplete ? "line-through" : "none",
-          color: isComplete ? "#4caf50" : "#333",
-        }}
-      >
-        {task}
-      </span>
-      <button
-        onClick={toggleCompletion}
-        style={{
-          backgroundColor: isComplete ? "#81c784" : "#ffb74d",
-          border: "none",
-          borderRadius: "4px",
-          padding: "4px 8px",
-          cursor: "pointer",
-          color: "white",
-          fontWeight: "bold",
-        }}
-      >
-        {isComplete ? "Undo" : "Complete"}
-      </button>
+      <div>
+        <input
+          type="checkbox"
+          checked={task.done}
+          onChange={() => onToggle(task.id)}
+        />
+        <span
+          style={{
+            textDecoration: task.done ? "line-through" : "none",
+            marginLeft: "0.5rem",
+          }}
+        >
+          {task.text}
+        </span>
+      </div>
+      <button onClick={() => onDelete(task.id)}>Delete</button>
     </li>
   );
 }
