@@ -1,12 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 
-export default function TaskItem({ task }) {
-  const [isComplete, setIsComplete] = useState(false);
-
-  const toggleCompletion = () => {
-    setIsComplete((prev) => !prev);
-  };
-
+export default function TaskItem({ task, onToggle, onDelete }) {
   return (
     <li
       style={{
@@ -16,33 +10,51 @@ export default function TaskItem({ task }) {
         marginBottom: "8px",
         padding: "8px",
         borderRadius: "6px",
-        backgroundColor: isComplete ? "#e8f5e9" : "#fff3e0",
+        backgroundColor: task.done ? "#e8f5e9" : "#fff3e0",
         border: "1px solid #ccc",
         fontFamily: "Arial",
       }}
     >
       <span
         style={{
-          textDecoration: isComplete ? "line-through" : "none",
-          color: isComplete ? "#4caf50" : "#333",
+          textDecoration: task.done ? "line-through" : "none",
+          color: task.done ? "#4caf50" : "#333",
         }}
       >
-        {task}
+        {task.text}
       </span>
-      <button
-        onClick={toggleCompletion}
-        style={{
-          backgroundColor: isComplete ? "#81c784" : "#ffb74d",
-          border: "none",
-          borderRadius: "4px",
-          padding: "4px 8px",
-          cursor: "pointer",
-          color: "white",
-          fontWeight: "bold",
-        }}
-      >
-        {isComplete ? "Undo" : "Complete"}
-      </button>
+      <div>
+        <button
+          onClick={() => onToggle(task.id)}
+          style={{
+            backgroundColor: task.done ? "#81c784" : "#ffb74d",
+            border: "none",
+            borderRadius: "4px",
+            padding: "4px 8px",
+            cursor: "pointer",
+            color: "white",
+            fontWeight: "bold",
+            marginRight: "0.5rem",
+          }}
+        >
+          {task.done ? "Undo" : "Complete"}
+        </button>
+
+        <button
+          onClick={() => onDelete(task.id)}
+          style={{
+            backgroundColor: "#e57373",
+            border: "none",
+            borderRadius: "4px",
+            padding: "4px 8px",
+            cursor: "pointer",
+            color: "white",
+            fontWeight: "bold",
+          }}
+        >
+          Delete
+        </button>
+      </div>
     </li>
   );
 }
