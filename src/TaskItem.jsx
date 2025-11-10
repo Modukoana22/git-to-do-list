@@ -7,7 +7,7 @@ export default function TaskItem({ task, onToggle, onDelete }) {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        marginBottom: "8px",
+        marginBottom: "0.5rem",
         padding: "8px",
         borderRadius: "6px",
         backgroundColor: task.done ? "#e8f5e9" : "#fff3e0",
