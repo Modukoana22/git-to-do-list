@@ -9,26 +9,52 @@ export default function TaskItem({ task, onToggle, onDelete }) {
         alignItems: "center",
         marginBottom: "0.5rem",
         padding: "8px",
-        backgroundColor: "#f5f5f5",
-        borderRadius: "5px",
+        borderRadius: "6px",
+        backgroundColor: task.done ? "#e8f5e9" : "#fff3e0",
+        border: "1px solid #ccc",
+        fontFamily: "Arial",
       }}
     >
+      <span
+        style={{
+          textDecoration: task.done ? "line-through" : "none",
+          color: task.done ? "#4caf50" : "#333",
+        }}
+      >
+        {task.text}
+      </span>
       <div>
-        <input
-          type="checkbox"
-          checked={task.done}
-          onChange={() => onToggle(task.id)}
-        />
-        <span
+        <button
+          onClick={() => onToggle(task.id)}
           style={{
-            textDecoration: task.done ? "line-through" : "none",
-            marginLeft: "0.5rem",
+            backgroundColor: task.done ? "#81c784" : "#ffb74d",
+            border: "none",
+            borderRadius: "4px",
+            padding: "4px 8px",
+            cursor: "pointer",
+            color: "white",
+            fontWeight: "bold",
+            marginRight: "0.5rem",
           }}
         >
-          {task.text}
-        </span>
+          {task.done ? "Undo" : "Complete"}
+        </button>
+
+        <button
+          onClick={() => onDelete(task.id)}
+          style={{
+            backgroundColor: "#e57373",
+            border: "none",
+            borderRadius: "4px",
+            padding: "4px 8px",
+            cursor: "pointer",
+            color: "white",
+            fontWeight: "bold",
+          }}
+        >
+          Delete
+        </button>
       </div>
-      <button onClick={() => onDelete(task.id)}>Delete</button>
     </li>
   );
 }
